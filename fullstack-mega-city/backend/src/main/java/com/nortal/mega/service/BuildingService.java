@@ -52,10 +52,11 @@ public class BuildingService {
 
     public Building updateBuilding(BuildingRequestDto buildingRequestDto) {
         LOGGER.info("Updating building by name: {}", buildingRequestDto.getName());
-        BuildingDbo buildingDbo = buildingRepository.findByName(buildingRequestDto.getName())
+        buildingRepository.findByName(buildingRequestDto.getName())
                 .orElseThrow(() -> new NoBuildingFoundException(
-                        String.format("Building with name: %s already exists", buildingRequestDto.getName())));
+                        String.format("No building with name: %s;", buildingRequestDto.getName())));
 
+        BuildingDbo buildingDbo = buildingDboMapper.map(buildingRequestDtoMapper.map(buildingRequestDto));
         return buildingDboMapper.map(buildingRepository.save(buildingDbo));
     }
 }

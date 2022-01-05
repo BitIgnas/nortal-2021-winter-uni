@@ -11,6 +11,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/v1/mega/building")
@@ -19,24 +21,24 @@ public class BuildingController {
     private final BuildingService buildingService;
     private final BuildingResponseDtoMapper buildingResponseDtoMapper;
 
-    @GetMapping
+    @GetMapping(value = "", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BuildingResponseDto>> getAll() {
         return ResponseEntity.ok(buildingService.findAll().stream().map(buildingResponseDtoMapper::map).collect(Collectors.toList()));
     }
 
-    @GetMapping("/{buildingId}")
+    @GetMapping(value = "/{buildingId}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<BuildingResponseDto> getBuildingById(@PathVariable Long buildingId) {
         return ResponseEntity.ok(buildingResponseDtoMapper.map(buildingService.findBuildingById(buildingId)));
     }
 
-    @PostMapping
-    public ResponseEntity<BuildingResponseDto> createBuilding(@RequestBody @Valid BuildingRequestDto buildingRequestDto) {
+    @PostMapping(value = "", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public ResponseEntity<BuildingResponseDto> createBuilding(@Valid  @RequestBody BuildingRequestDto buildingRequestDto) {
         URI location = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("api/v1/mega/building").toUriString());
         return ResponseEntity.created(location).body(buildingResponseDtoMapper.map(buildingService.saveBuilding(buildingRequestDto)));
     }
 
-    @PutMapping
-    public ResponseEntity<BuildingResponseDto> updateBuilding(@RequestBody @Valid BuildingRequestDto buildingRequestDto) {
+    @PutMapping(value = "", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
+    public ResponseEntity<BuildingResponseDto> updateBuilding(@Valid @RequestBody BuildingRequestDto buildingRequestDto) {
         return ResponseEntity.ok().body(buildingResponseDtoMapper.map(buildingService.updateBuilding(buildingRequestDto)));
     }
 }
