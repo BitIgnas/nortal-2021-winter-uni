@@ -15,12 +15,17 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { BuildingListComponent } from './lore/containers/building-list/building-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { ValidateStartsWithDirective } from './lore/directives/validators/validate-starts-with.directive';
+import { BuildingCreateFormComponent } from './lore/containers/building-create-form/building-create-form.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
-	declarations: [AppComponent, BuildingFormComponent, BuildingListComponent],
+	declarations: [AppComponent, BuildingFormComponent, BuildingListComponent, ValidateStartsWithDirective, BuildingCreateFormComponent],
 	imports: [
 		BrowserModule,
+		AppRoutingModule,
 		HttpClientModule,
+		TranslateModule,
 		TranslateModule.forRoot({
 			loader: {
 				provide: TranslateLoader,
@@ -28,16 +33,15 @@ import { MatTableModule } from '@angular/material/table';
 				deps: [HttpClient],
 			},
 		}),
-		AppRoutingModule,
 		BrowserAnimationsModule,
 		MatToolbarModule,
-		TranslateModule,
 		MatFormFieldModule,
 		MatInputModule,
 		ReactiveFormsModule,
 		MatDividerModule,
 		MatButtonModule,
 		MatTableModule,
+		MatIconModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

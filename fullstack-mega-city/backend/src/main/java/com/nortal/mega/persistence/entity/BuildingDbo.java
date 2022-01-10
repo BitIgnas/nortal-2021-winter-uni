@@ -1,6 +1,8 @@
 package com.nortal.mega.persistence.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
@@ -9,6 +11,8 @@ import javax.persistence.*;
 @Entity
 @Accessors(chain = true)
 @Table(name = "building")
+@AllArgsConstructor
+@NoArgsConstructor
 public class BuildingDbo {
 
     @Id

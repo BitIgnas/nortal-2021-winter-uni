@@ -13,5 +13,7 @@ public interface BuildingRepository extends CrudRepository<BuildingDbo, Long> {
 
     Optional<BuildingDbo> findByName(String name);
 
+    Optional<BuildingDbo> findByIndex(String index);
+
     List<BuildingDbo> findAll();
 }

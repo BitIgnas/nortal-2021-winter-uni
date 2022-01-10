@@ -7,10 +7,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class BuildingResponseDto {
 
+    private Long id;
     private String name;
     private String address;
     private String index;
     private String sectorCode;
     private Integer energyUnits;
     private Integer energyUnitMax;
+
 }

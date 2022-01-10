@@ -1,0 +1,5 @@
+}19:06:34.265 [Test worker] INFO com.nortal.mega.service.BuildingService - Saving building with name: test_name, index: CU89
+e19:06:34.363 [Test worker] INFO com.nortal.mega.service.BuildingService - Finding building by id: 0
+}19:06:34.377 [Test worker] INFO com.nortal.mega.service.BuildingService - Saving building with name: test_name, index: CU89
+a19:06:34.389 [Test worker] INFO com.nortal.mega.service.BuildingService - Finding ALL buildings
+h19:06:34.410 [Test worker] INFO com.nortal.mega.service.BuildingService - Deleting building with id: 0

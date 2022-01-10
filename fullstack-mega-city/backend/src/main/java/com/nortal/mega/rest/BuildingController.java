@@ -27,7 +27,7 @@ public class BuildingController {
     }
 
     @GetMapping(value = "/{buildingId}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<BuildingResponseDto> getBuildingById(@PathVariable Long buildingId) {
+    public ResponseEntity<BuildingResponseDto> getBuildingById(@PathVariable("buildingId") Long buildingId) {
         return ResponseEntity.ok(buildingResponseDtoMapper.map(buildingService.findBuildingById(buildingId)));
     }
 
@@ -40,5 +40,10 @@ public class BuildingController {
     @PutMapping(value = "", produces = APPLICATION_JSON_VALUE, consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<BuildingResponseDto> updateBuilding(@Valid @RequestBody BuildingRequestDto buildingRequestDto) {
         return ResponseEntity.ok().body(buildingResponseDtoMapper.map(buildingService.updateBuilding(buildingRequestDto)));
+    }
+
+    @DeleteMapping(value = "/{buildingId}")
+    public ResponseEntity<BuildingResponseDto> deleteBuildingById(@PathVariable("buildingId") Long id) {
+        return ResponseEntity.ok().body(buildingResponseDtoMapper.map(buildingService.deleteBuildingById(id)));
     }
 }

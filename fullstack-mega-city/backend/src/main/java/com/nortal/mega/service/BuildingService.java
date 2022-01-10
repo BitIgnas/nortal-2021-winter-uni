@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -51,12 +52,23 @@ public class BuildingService {
     }
 
     public Building updateBuilding(BuildingRequestDto buildingRequestDto) {
-        LOGGER.info("Updating building by name: {}", buildingRequestDto.getName());
-        buildingRepository.findByName(buildingRequestDto.getName())
+        LOGGER.info("Updating building with id: {}", buildingRequestDto.getId());
+        buildingRepository.findById(buildingRequestDto.getId())
                 .orElseThrow(() -> new NoBuildingFoundException(
-                        String.format("No building with name: %s;", buildingRequestDto.getName())));
+                        String.format("No building with id: %d.", buildingRequestDto.getId())));
 
-        BuildingDbo buildingDbo = buildingDboMapper.map(buildingRequestDtoMapper.map(buildingRequestDto));
-        return buildingDboMapper.map(buildingRepository.save(buildingDbo));
+
+        BuildingDbo buildingToSave = buildingDboMapper.map(buildingRequestDtoMapper.map(buildingRequestDto));
+        return buildingDboMapper.map(buildingRepository.save(buildingToSave));
+    }
+
+    @Transactional
+    public Building deleteBuildingById(Long id) {
+        LOGGER.info("Deleting building with id: {}", id);
+        BuildingDbo buildingDbo = buildingRepository.findById(id)
+                .orElseThrow(() -> new NoBuildingFoundException(String.format("No building with id: %d found.", id)));
+
+        buildingRepository.delete(buildingDbo);
+        return buildingDboMapper.map(buildingDbo);
     }
 }

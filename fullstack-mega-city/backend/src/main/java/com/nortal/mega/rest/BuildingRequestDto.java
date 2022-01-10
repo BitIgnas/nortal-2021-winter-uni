@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 @Accessors(chain = true)
 public class BuildingRequestDto {
 
+    private Long id;
     @NotEmpty
     private String name;
     @NotEmpty

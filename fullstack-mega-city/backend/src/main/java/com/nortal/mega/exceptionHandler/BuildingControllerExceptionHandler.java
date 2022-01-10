@@ -28,7 +28,7 @@ public class BuildingControllerExceptionHandler extends ResponseEntityExceptionH
                 .description(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(BuildingAlreadyExistsException.class)
@@ -41,7 +41,7 @@ public class BuildingControllerExceptionHandler extends ResponseEntityExceptionH
                 .description(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity<ErrorMessage>(errorMessage, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
 
     @Override
@@ -67,6 +67,6 @@ public class BuildingControllerExceptionHandler extends ResponseEntityExceptionH
                 .description(request.getDescription(false))
                 .build();
 
-        return new ResponseEntity<Object>(errorMessage, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 }

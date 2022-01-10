@@ -9,6 +9,7 @@
                   : ('lore.editBuilding' | translate: { name: building?.name })
           }}
         </h3>
+        <button mat-raised-button color="primary" [routerLink]="['/buildings']">Return to list</button>
       </td>
     </tr>
 
@@ -40,6 +41,8 @@
         <mat-form-field class="w-100p" appearance="outline">
           <mat-label>{{ 'lore.building.index' | translate }}</mat-label>
           <input matInput formControlName="index" />
+          <mat-error *ngIf="hasError('index', 'required')">{{ 'common.form.required' | translate }}</mat-error>
+          <mat-error *ngIf="!hasError('index', 'startsWithValidator')">This field must start with index: NO</mat-error>
         </mat-form-field>
       </td>
     </tr>
@@ -49,13 +52,17 @@
         <mat-label>{{ 'lore.building.sectorCode' | translate }}</mat-label>
         <input matInput formControlName="sectorCode" />
       </mat-form-field>
+      <mat-error *ngIf="hasError('sectorCode', 'required')">{{ 'common.form.required' | translate }}
+      </mat-error>
+      <mat-error *ngIf="hasError('sectorCode', 'maxlength')">{{ 'common.form.maxlength' | translate }}
+      </mat-error>
     </td>
 
     <tr>
       <td colspan="2">
         <mat-form-field class="w-100p" appearance="outline">
           <mat-label>{{ 'lore.building.energyUnitsMax' | translate }}</mat-label>
-          <input matInput formControlName="energyUnitMax" />
+          <input matInput formControlName="energyUnitMax"/>
           <mat-hint>{{ 'lore.building.energyUnitsMax' | translate }}</mat-hint>
           <mat-error *ngIf="hasError('energyUnitMax', 'required')">{{ 'common.form.required' | translate }}</mat-error>
         </mat-form-field>
@@ -66,12 +73,16 @@
       <td colspan="2">
         <mat-form-field class="w-100p" appearance="outline">
           <mat-label>{{ 'lore.building.energyUnits' | translate }}</mat-label>
-          <input matInput formControlName="energyUnits" />
+          <input matInput formControlName="energyUnits" [errorStateMatcher]="matcher"/>
           <mat-hint>{{ 'lore.building.energyUnitsHint' | translate }}</mat-hint>
           <mat-error *ngIf="hasError('energyUnits', 'required')">
             {{ 'common.form.required' | translate }}
           </mat-error>
+
+          <mat-error *ngIf="form.hasError('exceededMax')">This building can stake a maximum of {{ building.energyUnitMax }} units
+          </mat-error>
         </mat-form-field>
+        
       </td>
     </tr>
 

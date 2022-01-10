@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-06T00:01:51+0200",
+    date = "2022-01-08T20:38:28+0200",
     comments = "version: 1.4.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.1.jar, environment: Java 11.0.11 (AdoptOpenJDK)"
 )
 @Component
@@ -20,6 +20,7 @@ public class BuildingResponseDtoMapperImpl implements BuildingResponseDtoMapper 
 
         BuildingResponseDto buildingResponseDto = new BuildingResponseDto();
 
+        buildingResponseDto.setId( building.getId() );
         buildingResponseDto.setName( building.getName() );
         buildingResponseDto.setAddress( building.getAddress() );
         buildingResponseDto.setIndex( building.getIndex() );
@@ -38,6 +39,7 @@ public class BuildingResponseDtoMapperImpl implements BuildingResponseDtoMapper 
 
         Building building = new Building();
 
+        building.setId( buildingResponseDto.getId() );
         building.setName( buildingResponseDto.getName() );
         building.setAddress( buildingResponseDto.getAddress() );
         building.setIndex( buildingResponseDto.getIndex() );

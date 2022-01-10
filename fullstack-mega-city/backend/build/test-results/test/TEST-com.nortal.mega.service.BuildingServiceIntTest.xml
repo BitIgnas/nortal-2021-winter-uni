@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nortal.mega.service.BuildingServiceIntTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2022-01-08T17:06:33" hostname="DESKTOP-1PVUU2T" time="0.923">
+  <properties/>
+  <testcase name="updateBuilding()" classname="com.nortal.mega.service.BuildingServiceIntTest" time="0.87"/>
+  <testcase name="shouldFindBuildingById()" classname="com.nortal.mega.service.BuildingServiceIntTest" time="0.012"/>
+  <testcase name="shouldSaveBuilding()" classname="com.nortal.mega.service.BuildingServiceIntTest" time="0.008"/>
+  <testcase name="shouldFindAllBuildings()" classname="com.nortal.mega.service.BuildingServiceIntTest" time="0.011"/>
+  <testcase name="shouldDeleteBuildingById()" classname="com.nortal.mega.service.BuildingServiceIntTest" time="0.018"/>
+  <system-out><![CDATA[19:06:34.265 [Test worker] INFO com.nortal.mega.service.BuildingService - Saving building with name: test_name, index: CU89
+19:06:34.363 [Test worker] INFO com.nortal.mega.service.BuildingService - Finding building by id: 0
+19:06:34.377 [Test worker] INFO com.nortal.mega.service.BuildingService - Saving building with name: test_name, index: CU89
+19:06:34.389 [Test worker] INFO com.nortal.mega.service.BuildingService - Finding ALL buildings
+19:06:34.410 [Test worker] INFO com.nortal.mega.service.BuildingService - Deleting building with id: 0
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

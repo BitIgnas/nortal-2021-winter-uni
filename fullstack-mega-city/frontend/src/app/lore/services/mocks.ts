@@ -1,6 +1,7 @@
-import { Building } from '../model/building';
+import { BuildingResponse } from "../model/building-response";
 
-export const BUILDING_MOCKS: Building[] = [
+
+export const BUILDING_MOCKS: BuildingResponse[] = [
 	{
 		id: '1',
 		name: 'Building 1',

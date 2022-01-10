@@ -1,43 +1,63 @@
+import { RefreshService } from './refresh.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Building } from '../model/building';
 import { Observable, of, throwError as observableThrowError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
+import { BuildingRequest } from '../model/building-request';
+import { BuildingResponse } from '../model/building-response';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class BuildingService {
-	private apiUrl = 'api/v1/mega/building';
+	private readonly baseUrl = environment.baseUrl;
 
-	constructor(private http: HttpClient) {}
+	constructor(
+		private http: HttpClient,
+		private refreshService: RefreshService
+		) {}
 
-	getAll(): Observable<Building[]> {
+	getAll(): Observable<BuildingResponse[]> {
 		return this.http
-		  .get<Building[]>(this.apiUrl)
+		  .get<BuildingResponse[]>(this.baseUrl)
 		  .pipe(map(data => data), catchError(this.handleError))
 	}
 
-	get(id: string): Observable<Building> {
+	get(id: string): Observable<BuildingResponse> {
 		return this.http
-		  .get<Building>(`${this.apiUrl}/${id}`)
+		  .get<BuildingResponse>(`${this.baseUrl}/${id}`)
 		  .pipe(map(data => data), catchError(this.handleError))
 	}
 
-	post(data: Building) {
+	post(data: BuildingRequest) {
 		const headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		return this.http.post<Building>(this.apiUrl, data).pipe(catchError(this.handleError));
+		return this.http.post<BuildingResponse>(this.baseUrl, data);
 	}
 
-	put(data: Building) {
+	put(data: BuildingRequest) {
 		const headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		return this.http.put<Building>(this.apiUrl, data).pipe(catchError(this.handleError));
+		return this.http.put<BuildingResponse>(this.baseUrl, data).pipe(catchError(this.handleError));
+	}
+
+	delete(id: number) {
+		const headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		return this.http.delete<BuildingResponse>(`${this.baseUrl}/${id}`)
+		.pipe(
+			tap(() => {
+				this.refreshService.refresh();
+			}),
+			catchError(this.handleError)
+		);
 	}
 
 	private handleError(res: HttpErrorResponse | any) {
-		console.error(res.error || res.body.error);
+		console.error(res?.error || res.body?.error);
 		return observableThrowError(res.error || 'Server error');
 	}
 }
+
+

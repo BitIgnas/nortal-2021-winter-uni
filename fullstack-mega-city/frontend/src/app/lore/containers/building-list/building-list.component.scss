@@ -24,3 +24,12 @@ table {
 tr.mat-row:hover {
 	background: whitesmoke;
 }
+
+.table-view {
+	display: flex !important;
+	padding: 0.5rem;
+}
+
+.mat-mini-fab {
+	margin: 0.4rem !important;
+}

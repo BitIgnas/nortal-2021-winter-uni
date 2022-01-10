@@ -1,6 +1,6 @@
-export class Building {
-	id: string;
-	name: string;
+export interface BuildingRequest {
+    id: number;
+    name: string;
 	address: string;
 	index: string;
 	sectorCode: string;
